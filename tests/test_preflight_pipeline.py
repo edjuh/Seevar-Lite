@@ -28,17 +28,19 @@ def test_build_nightly_plan_filters_weather_dark_visibility(tmp_path):
             "targets": [
                 {
                     "name": "ST Boo",
-                    "ra_deg": 224.44,
-                    "dec_deg": 40.73,
+                    "ra": 224.44,
+                    "dec": 40.73,
                     "priority": 10,
-                    "integration_sec": 600,
+                    "duration": 600,
+                    "recommended_cadence_days": 1,
                 },
                 {
                     "name": "Too South",
-                    "ra_deg": 10.0,
-                    "dec_deg": -80.0,
+                    "ra": 10.0,
+                    "dec": -80.0,
                     "priority": 1,
-                    "integration_sec": 600,
+                    "duration": 600,
+                    "recommended_cadence_days": 1,
                 },
             ]
         },

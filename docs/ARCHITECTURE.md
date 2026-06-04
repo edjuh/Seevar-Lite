@@ -5,7 +5,7 @@ Seevar-Lite is deliberately small.
 Preflight:
 
 ```text
-object JSON
+SeeVar campaign target catalog
 -> weather gate
 -> dark-window gate
 -> altitude visibility gate

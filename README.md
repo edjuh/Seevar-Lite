@@ -35,7 +35,7 @@ Preflight:
 
 ```bash
 seevar-lite-preflight \
-  --objects examples/objects.json \
+  --objects catalogs/campaign_targets.json \
   --site examples/site.json \
   --weather examples/weather.json \
   --out runs/preflight \
@@ -52,11 +52,19 @@ Outputs:
 
 ## JSON Catalogs
 
-Targets:
+Targets use the existing SeeVar campaign catalog shape:
 
 ```json
 {
-  "ST Boo": {"ra_deg": 224.44, "dec_deg": 40.73}
+  "targets": [
+    {
+      "name": "ST Boo",
+      "ra": 224.44,
+      "dec": 40.73,
+      "recommended_cadence_days": 1,
+      "duration": 600
+    }
+  ]
 }
 ```
 

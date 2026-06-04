@@ -37,6 +37,30 @@ def load_json(path: Path) -> Any:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+# Function: load_objects
+def load_objects(path: Path) -> list[dict[str, Any]]:
+    payload = load_json(path)
+    rows = payload.get("targets", payload) if isinstance(payload, dict) else payload
+    if not isinstance(rows, list):
+        raise ValueError(f"{path} does not contain a target list")
+
+    objects = []
+    for row in rows:
+        objects.append(
+            {
+                "name": row["name"],
+                "ra_deg": float(row.get("ra_deg", row.get("ra"))),
+                "dec_deg": float(row.get("dec_deg", row.get("dec"))),
+                "priority": int(row.get("priority", 100)),
+                "cadence_days": float(row.get("cadence_days", row.get("recommended_cadence_days", 1.0))),
+                "integration_sec": int(row.get("integration_sec", row.get("duration", 600))),
+                "type": row.get("type"),
+                "max_mag": row.get("max_mag"),
+            }
+        )
+    return objects
+
+
 # Function: parse_utc
 def parse_utc(value: str) -> datetime:
     parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -135,8 +159,7 @@ def build_nightly_plan(
     max_targets: int = 25,
 ) -> dict[str, Any]:
     proof = StateLedger(out_dir)
-    object_payload = load_json(objects_path)
-    objects = list(object_payload.get("targets", object_payload) if isinstance(object_payload, dict) else object_payload)
+    objects = load_objects(objects_path)
     site = parse_site(load_json(site_path))
     weather_ok, weather_reason = weather_allows(load_json(weather_path) if weather_path.exists() else {})
     proof.record("weather", "pass" if weather_ok else "fail", evidence=str(weather_path), reason=weather_reason)
