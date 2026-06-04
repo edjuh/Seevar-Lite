@@ -1,0 +1,60 @@
+# Seevar-Lite
+
+Clean AAVSO-first reducer for SeeVar.
+
+Scope:
+- ingest FITS frames
+- stack by target
+- require WCS proof
+- perform aperture photometry from JSON catalogs
+- write state/proof JSON
+- stage AAVSO Extended report rows
+
+Not in scope:
+- telescope steering
+- dashboard
+- direct Alpaca exposure loops
+- pretty-picture processing
+
+## Quick Start
+
+```bash
+python -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+
+seevar-lite-postflight \
+  --frames /path/to/fits \
+  --targets examples/targets.json \
+  --comparisons examples/comparisons.json \
+  --out runs/test
+```
+
+Outputs:
+- `runs/test/state.json`
+- `runs/test/proof.jsonl`
+- `runs/test/stacks/*.fits`
+- `runs/test/reports/aavso_extended.txt`
+
+## JSON Catalogs
+
+Targets:
+
+```json
+{
+  "ST Boo": {"ra_deg": 224.44, "dec_deg": 40.73}
+}
+```
+
+Comparison stars:
+
+```json
+{
+  "ST Boo": [
+    {"id": "C1", "ra_deg": 224.41, "dec_deg": 40.71, "mag": 12.3},
+    {"id": "C2", "ra_deg": 224.48, "dec_deg": 40.76, "mag": 12.8}
+  ]
+}
+```
+
+The first rule is simple: no WCS, no photometry, no AAVSO row.

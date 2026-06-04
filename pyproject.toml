@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "seevar-lite"
+version = "0.1.0"
+description = "AAVSO-first postflight reducer for SeeVar."
+requires-python = ">=3.11"
+dependencies = [
+  "astropy>=7.0",
+  "numpy>=2.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+seevar-lite-postflight = "seevar_lite.cli:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
