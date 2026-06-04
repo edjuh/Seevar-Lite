@@ -2,6 +2,20 @@
 
 Seevar-Lite is deliberately small.
 
+Preflight:
+
+```text
+object JSON
+-> weather gate
+-> dark-window gate
+-> altitude visibility gate
+-> cadence gate
+-> nightly_plan.json
+-> JSON proof/state
+```
+
+Postflight:
+
 ```text
 FITS frames
 -> group by OBJECT

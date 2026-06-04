@@ -19,6 +19,7 @@ dev = [
 
 [project.scripts]
 seevar-lite-postflight = "seevar_lite.cli:main"
+seevar-lite-preflight = "seevar_lite.preflight_cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

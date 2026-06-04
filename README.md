@@ -3,6 +3,7 @@
 Clean AAVSO-first reducer for SeeVar.
 
 Scope:
+- build a nightly AAVSO plan from object/weather/dark-window JSON
 - ingest FITS frames
 - stack by target
 - require WCS proof
@@ -30,7 +31,20 @@ seevar-lite-postflight \
   --out runs/test
 ```
 
+Preflight:
+
+```bash
+seevar-lite-preflight \
+  --objects examples/objects.json \
+  --site examples/site.json \
+  --weather examples/weather.json \
+  --out runs/preflight \
+  --start-utc 2026-06-04T20:00:00Z \
+  --end-utc 2026-06-05T03:00:00Z
+```
+
 Outputs:
+- `runs/preflight/nightly_plan.json`
 - `runs/test/state.json`
 - `runs/test/proof.jsonl`
 - `runs/test/stacks/*.fits`
