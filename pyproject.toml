@@ -20,6 +20,8 @@ dev = [
 [project.scripts]
 seevar-lite-postflight = "seevar_lite.cli:main"
 seevar-lite-preflight = "seevar_lite.preflight_cli:main"
+seevar-lite-observe-dryrun = "seevar_lite.observe_dryrun_cli:main"
+seevar-lite-export-seestar-alp = "seevar_lite.seestar_alp_cli:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

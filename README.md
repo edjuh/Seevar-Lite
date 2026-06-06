@@ -43,8 +43,32 @@ seevar-lite-preflight \
   --end-utc 2026-06-05T03:00:00Z
 ```
 
+Observing dry-run:
+
+```bash
+seevar-lite-observe-dryrun \
+  --plan runs/preflight/nightly_plan.json \
+  --out runs/observe-dryrun \
+  --max-targets 3 \
+  --frames 3
+```
+
+Export for `seestar_alp`:
+
+```bash
+seevar-lite-export-seestar-alp \
+  --plan runs/preflight/nightly_plan.json \
+  --out runs/seestar-alp \
+  --host 192.168.178.57 \
+  --device 1 \
+  --max-targets 3
+```
+
 Outputs:
 - `runs/preflight/nightly_plan.json`
+- `runs/observe-dryrun/proof.jsonl`
+- `runs/seestar-alp/seestar_alp_schedule.json`
+- `runs/seestar-alp/ssalp_commands.sh`
 - `runs/test/state.json`
 - `runs/test/proof.jsonl`
 - `runs/test/stacks/*.fits`
